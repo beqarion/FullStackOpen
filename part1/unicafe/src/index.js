@@ -41,16 +41,21 @@ const Statistics = ({good, neutral, bad}) => {
   return (
     <>
       <h1>statistics</h1>
-      <Statistic text='good' value={good}/> <br/>
-      <Statistic text='neutral'value={neutral}/> <br/>
-      <Statistic text='bad' value={bad}/> <br/>
-      <Statistic text='all' value={sum}/> <br/>
-      <Statistic text='average' value={(good - bad)/(sum)}/> <br/>
-      <Statistic text='positive' value={good/sum*100+"%"} />
+      <table>
+        <tbody>
+        <Statistic text='good' value={good}/>
+        <Statistic text='neutral'value={neutral}/>
+        <Statistic text='bad' value={bad}/>
+        <Statistic text='all' value={sum}/>
+        <Statistic text='average' value={(good - bad)/(sum)}/>
+        <Statistic text='positive' value={good/sum*100+"%"} />
+        </tbody>
+      </table>
+      
     </>
   )
 }
-const Statistic = ({text,value}) => `${text} ${value}`;
+const Statistic = ({text,value}) => <tr><td>{text}</td><td>{value}</td></tr>;
 ReactDOM.render(<App />, 
   document.getElementById('root')
 )
