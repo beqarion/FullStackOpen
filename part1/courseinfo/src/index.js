@@ -19,7 +19,7 @@ const App = () => {
       }
     ]
   }
-  
+  console.log("beqar");
   return (
     <div>
       <Header course={course.name} />
