@@ -6,10 +6,15 @@ const App = () => {
     { name: 'Arto Hellas' }
   ]) 
   const [ newName, setNewName ] = useState('')
-
   const handleChange = (event) => setNewName(event.target.value)
   const handleSubmit = (event) => {
       event.preventDefault()
+      if(persons.some( person => {
+          return newName.trim().replace(/\s\s+/g, ' ') === person.name.trim().replace(/\s\s+/g, ' ')
+      })) {
+        alert(`${newName.trim().replace(/\s\s+/g, ' ')} is already added to phonebook`)
+        return
+      }
       const contact = {name: newName}
       setPersons(persons.concat(contact))
       setNewName('')
