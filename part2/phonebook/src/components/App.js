@@ -3,7 +3,7 @@ import Person from './Person'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', number: '040-1234567' }
   ]) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
@@ -19,9 +19,10 @@ const App = () => {
         alert(`${newName.trim().replace(/\s\s+/g, ' ')} is already added to phonebook`)
         return
       }
-      const contact = {name: newName}
+      const contact = {name: newName, number: newNumber}
       setPersons(persons.concat(contact))
       setNewName('')
+      setNewNumber('')
   }
   return (
     <div>
@@ -38,7 +39,9 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map( person => <Person name={person.name} key={person.name}/>)}
+      {persons.map( person => 
+        <Person name={person.name} number={person.number} key={person.name} />
+      )}
     </div>
   )
 }
