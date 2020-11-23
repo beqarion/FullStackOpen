@@ -6,7 +6,11 @@ const App = () => {
     { name: 'Arto Hellas' }
   ]) 
   const [ newName, setNewName ] = useState('')
-  const handleChange = (event) => setNewName(event.target.value)
+  const [ newNumber, setNewNumber ] = useState('')
+
+  const handleInput = (event) => setNewName(event.target.value)
+  const handleNumber = (event) => setNewNumber(event.target.value)
+
   const handleSubmit = (event) => {
       event.preventDefault()
       if(persons.some( person => {
@@ -24,7 +28,10 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          name: <input value={newName} onChange={handleChange} />
+          name: <input value={newName} onChange={handleInput} />
+        </div>
+        <div>
+            number: <input value={newNumber} onChange={handleNumber} />
         </div>
         <div>
           <button type="submit">add</button>
