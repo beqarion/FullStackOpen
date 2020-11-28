@@ -25,7 +25,7 @@ const App = () => {
   
   const handleInput = (event) => setNewName(event.target.value)
   const handleNumber = (event) => setNewNumber(event.target.value)
-
+  const handleChange = event => {setFilter(event.target.value)}
   const handleSubmit = (event) => {
       event.preventDefault()
       if(persons.some( person => {
@@ -43,7 +43,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter setFilter={setFilter} filter={filter}/>
+      <Filter handleChange={handleChange} filter={filter}/>
       <h3>add a new</h3>
       <PersonForm 
         handleSubmit={handleSubmit}

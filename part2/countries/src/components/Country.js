@@ -9,7 +9,7 @@ const Country = ({country}) => {
             <div>population {country.population}</div>
             <h3>languages</h3>
             <div><ul>{country.languages.map((el,i)=><li key={i+1}>{el.name}</li>)}</ul></div>
-            <img src="https://restcountries.eu/data/afg.svg" style={{width:"100px"}}/>
+            <img src={country.flag} style={{width:"100px"}} alt=""/>
         </>
     )
 }
