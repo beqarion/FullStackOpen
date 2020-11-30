@@ -15,8 +15,6 @@ const Content = ({countries,printCountry}) => {
                 <button onClick={()=>{printCountry([c])}}>show</button>
             </div>)}
         </>
-            
-        
     }
     return <></>
 }

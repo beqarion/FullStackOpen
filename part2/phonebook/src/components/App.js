@@ -35,9 +35,13 @@ const App = () => {
         return
       }
       const contact = {name: newName, number: newNumber}
-      setPersons(persons.concat(contact))
-      setNewName('')
-      setNewNumber('')
+      axios.post('http://localhost:3001/persons',contact)
+        .then(response => {
+          setPersons(persons.concat(contact))
+          setNewName('')
+          setNewNumber('')
+        })
+      
   }
   
   return (
