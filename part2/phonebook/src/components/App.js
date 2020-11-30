@@ -5,10 +5,10 @@ import Persons from './Persons'
 import personServices from '../services/persons'
 
 const App = () => {
-  const [persons, setPersons] = useState([])
+  const [ persons, setPersons ] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
-  const [filter, setFilter] = useState('')
+  const [ filter, setFilter ] = useState('')
 
   useEffect(()=>{
     personServices
@@ -26,23 +26,28 @@ const App = () => {
   const handleInput = (event) => setNewName(event.target.value)
   const handleNumber = (event) => setNewNumber(event.target.value)
   const handleChange = event => {setFilter(event.target.value)}
+  
   const handleSubmit = (event) => {
       event.preventDefault()
-      if(persons.some( person => {
-          return newName.trim().replace(/\s\s+/g, ' ') === person.name.trim().replace(/\s\s+/g, ' ')
-      })) {
-        alert(`${newName.trim().replace(/\s\s+/g, ' ')} is already added to phonebook`)
-        return
+      const trimWS = n => n.trim().replace(/\s\s+/g, ' ')
+      const contact = {name: trimWS(newName), number: newNumber}
+      if(persons.some(p => trimWS(p.name) === trimWS(newName))){
+        const duplicateObj = persons.find(p=>trimWS(p.name) === trimWS(newName))
+        const id = duplicateObj.id
+        const newObj = {...duplicateObj, number: newNumber}
+        personServices.update(id, newObj)
+          .then( response => {
+            console.log(response)
+            setPersons(persons.map(p => p.id !== id ? p : response))
+          })
+      } else {
+        personServices.create(contact)
+          .then( response => {
+            setPersons(persons.concat(response))
+          })
       }
-      const contact = {name: newName, number: newNumber}
-      personServices
-        .create(contact)
-        .then(response => {
-          setPersons(persons.concat(response))
-          setNewName('')
-          setNewNumber('')
-        })
-      
+      setNewName('')
+      setNewNumber('')
   }
   const deleteContact = (id) => {
     if(window.confirm('Are you sure ?')){
