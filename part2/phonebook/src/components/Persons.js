@@ -1,9 +1,9 @@
 import React from 'react'
 import Person from './Person'
 
-const Persons = ({contactsToShow}) => {
+const Persons = ({contactsToShow,deleteContact}) => {
     return contactsToShow.map( person => 
-        <Person name={person.name} number={person.number} key={person.name} />
+        <Person name={person} number={person.number} key={person.name} deleteContact={deleteContact}/>
     )
 }
 

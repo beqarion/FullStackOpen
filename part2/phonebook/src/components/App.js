@@ -44,7 +44,13 @@ const App = () => {
         })
       
   }
-  
+  const deleteContact = (id) => {
+    if(window.confirm('Are you sure ?')){
+      console.log(`deleting ${id}`)
+      personServices.deleteContact(id)
+      setPersons(persons.filter(p=>p.id!==id))
+    }
+  }
   return (
     <div>
       <h2>Phonebook</h2>
@@ -58,7 +64,7 @@ const App = () => {
         newNumber={newNumber}
       />
       <h3>Numbers</h3>
-      <Persons contactsToShow={contactsToShow} />
+      <Persons contactsToShow={contactsToShow} deleteContact={deleteContact} />
     </div>
   )
 }

@@ -5,7 +5,7 @@ const PersonForm = ({
     handleInput,
     handleNumber,
     newName,
-    newNumber
+    newNumber,
 }) => {
     return (
         <form onSubmit={handleSubmit}>
