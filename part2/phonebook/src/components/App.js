@@ -43,6 +43,10 @@ const App = () => {
             setPersons(persons.map(p => p.id !== id ? p : response))
             setNotif({msg:`Updated ${response.name}`,type:'success'})
           })
+          .catch(err => {
+            const message = `Information of ${contact.name} has already been removed from server`
+            setNotif({msg:message,type:'fail'})
+          })
       } else {
         personServices.create(contact)
           .then( response => {
@@ -57,7 +61,11 @@ const App = () => {
   const deleteContact = (id) => {
     if(window.confirm('Are you sure ?')){
       console.log(`deleting ${id}`)
-      personServices.deleteContact(id)
+      personServices.deleteContact(id).catch( err => {
+        const message = `The contact has already been removed from server`
+        setNotif({msg:message,type:'fail'})
+      })
+      setTimeout(()=>{setNotif({msg:null,type:null})},3000)
       setPersons(persons.filter(p=>p.id!==id))
     }
   }
