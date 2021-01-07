@@ -48,10 +48,16 @@ const App = () => {
             setNotif({msg:message,type:'fail'})
           })
       } else {
-        personServices.create(contact)
+        personServices
+          .create(contact)
           .then( response => {
             setPersons(persons.concat(response))
             setNotif({msg:`Added ${response.name}`,type:'success'})
+          })
+          .catch(error => {
+            const { data } = error.response
+            setNotif({msg: data.message, type: 'fail'})
+            console.log(data)
           })
       }
       setTimeout(()=>{setNotif({msg:null,type:null})},3000)
