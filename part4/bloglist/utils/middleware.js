@@ -23,9 +23,14 @@ const errorHandler = (error, request, response, next) => {
 
   next(error)
 }
+const addLikeProp = (request, response, next) => {
+  if (!request.body.hasOwnProperty('likes')) {request.body.likes = 0}
+  next()
+}
 
 module.exports = {
   requestLogger,
   unknownEndpoint,
-  errorHandler
+  errorHandler,
+  addLikeProp
 }

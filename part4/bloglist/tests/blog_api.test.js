@@ -47,6 +47,19 @@ test('a valid blog can be added ', async () => {
       'async/await simplifies making async calls'
     )
   })
+  test('if \'likes\' property is missing it should default with zero', async () => {
+    const blogObj = {
+        title:'asdf',
+        author: 'asdf'
+    }
+    await api
+      .post('/api/blogs')
+      .send(blogObj)
+      .expect(201)
+      .then(res => {
+        expect(res.body.likes === 0)
+      })
+  })
 
 afterAll(() => {
   mongoose.connection.close()

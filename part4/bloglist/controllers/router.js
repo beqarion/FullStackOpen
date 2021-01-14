@@ -12,7 +12,7 @@ router.get('/', (request, response) => {
 
 router.post('/', (request, response) => {
   const blog = new Blog(request.body)
-
+  
   blog
     .save()
     .then(result => {
