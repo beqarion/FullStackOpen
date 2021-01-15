@@ -4,12 +4,14 @@ const initialBlogs = [
   {
     title: 'HTML is easy',
     author: 'Bekar',
-    url: 'Some url'
+    url: 'Some url',
+    likes: 10
   },
   {
     title: 'Browser can execute only Javascript',
     author: 'Bekar',
-    url: 'Some url'
+    url: 'Some url',
+    likes: 5
   }
 ]
 
@@ -26,6 +28,11 @@ const blogsInDb = async () => {
   return blogs.map(blog => blog.toJSON())
 }
 
+const blogInDb = async (id) => {
+  const blog = await Blog.findById(id)
+  return blog.toJSON()
+}
+
 module.exports = {
-  initialBlogs, nonExistingId, blogsInDb
+  initialBlogs, nonExistingId, blogsInDb, blogInDb
 }

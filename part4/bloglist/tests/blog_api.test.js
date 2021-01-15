@@ -62,7 +62,7 @@ test('a valid blog can be added ', async () => {
         expect(res.body.likes === 0)
       })
   })
-  test('a note can be deleted', async () => {
+  test('a blog can be deleted', async () => {
     const blogsAtStart = await helper.blogsInDb()
     const blogToDelete = blogsAtStart[0]
   
@@ -80,6 +80,17 @@ test('a valid blog can be added ', async () => {
   
     expect(titles).not.toContain(blogToDelete.title)
   })
+  test('a blog can be edited', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToUpdate = blogsAtStart[0]
+
+    await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send({likes: blogToUpdate.likes + 1000})
+
+    const updatedBlog = await helper.blogInDb(blogToUpdate.id)
+    expect (updatedBlog.likes).toBe(blogToUpdate.likes + 1000)
+  }) 
 
 afterAll(() => {
   mongoose.connection.close()
