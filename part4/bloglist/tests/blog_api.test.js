@@ -30,7 +30,8 @@ test('blog document has property \'id\'', async () => {
 test('a valid blog can be added ', async () => {
     const newBlog = {
       title: 'async/await simplifies making async calls',
-      author: 'Bekar'
+      author: 'Bekar',
+      url: 'some url'
     }
   
     await api
@@ -50,7 +51,8 @@ test('a valid blog can be added ', async () => {
   test('if \'likes\' property is missing it should default with zero', async () => {
     const blogObj = {
         title:'asdf',
-        author: 'asdf'
+        author: 'asdf',
+        url: 'asdf'
     }
     await api
       .post('/api/blogs')

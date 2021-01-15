@@ -3,11 +3,13 @@ const Blog = require('../models/blog')
 const initialBlogs = [
   {
     title: 'HTML is easy',
-    author: 'Bekar'
+    author: 'Bekar',
+    url: 'Some url'
   },
   {
     title: 'Browser can execute only Javascript',
-    author: 'Bekar'
+    author: 'Bekar',
+    url: 'Some url'
   }
 ]
 
